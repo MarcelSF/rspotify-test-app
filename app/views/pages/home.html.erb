@@ -1,4 +1,17 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <%= form_with url: root_path, method: :get, html: {class: "mb-4"} do |f| %>
+    <%= f.label :query, "Type to search" %>
+    <%= f.text_field :query,
+                    class: "form-control",
+                    value: params[:query]
+                    %>
+  <% end %>
 
-<%= session[:spotify_user] %>
+  <div class="my-3">
+    <% @albums.each do |album|  %>
+      <%= render 'album', album: album %>
+    <% end %>
+  </div>
+</div>
