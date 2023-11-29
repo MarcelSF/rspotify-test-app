@@ -1,6 +1,4 @@
 <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= album.images.first["url"] %>)">
-  <%= link_to album.name, album_path(album.id) %>
-  <% album.artists.each do |a| %>
-    - by <%= a.name %>
-  <% end %>
+  <%= link_to album.name.truncate(20), album_path(album.id) %>
+  <small><% album.artists.join(", ").truncate(20) %></small>
 </div>
