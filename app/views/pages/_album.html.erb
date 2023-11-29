@@ -1,6 +1,6 @@
-<div>
+<div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= album.images.first["url"] %>)">
   <%= album.name %>
   <% album.artists.each do |a| %>
-    -<%= a.name %>
+    - by <%= a.name %>
   <% end %>
 </div>

@@ -1,17 +1,20 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
 <div class="container">
+  <h1>Album Search</h1>
   <%= form_with url: root_path, method: :get, html: {class: "mb-4"} do |f| %>
-    <%= f.label :query, "Type to search" %>
+    <%= f.label :query, "Type to search Albums on Spotify" %>
     <%= f.text_field :query,
                     class: "form-control",
                     value: params[:query]
                     %>
   <% end %>
 
-  <div class="my-3">
-    <% @albums.each do |album|  %>
-      <%= render 'album', album: album %>
-    <% end %>
-  </div>
+  <% if @albums %>
+    <div class="my-3">
+      <div class="card-grid">
+        <% @albums.each do |album|  %>
+            <%= render 'album', album: album %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
