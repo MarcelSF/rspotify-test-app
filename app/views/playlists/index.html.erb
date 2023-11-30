@@ -1,0 +1,9 @@
+<div class="container">
+  # display all the playslists as cards
+  <div class="my-3">
+    <div class="card-grid">
+      <% @playlists.each do |playlist|  %>
+          <%= render 'playlist', playlist: playlist %>
+      <% end %>
+    </div>
+</div>

@@ -1,6 +1,11 @@
 class PlaylistsController < ApplicationController
+  def index
+    @playlists = current_user.playlists
+  end
+
   def show
     @playlist = Playlist.find(params[:id])
+    @spotify_playlist = RSpotify::Playlist.find(session[:spotify_user], @playlist.spotify_id)
   end
 
   def new
@@ -11,7 +16,8 @@ class PlaylistsController < ApplicationController
     @playlist = Playlist.new(playlist_params)
     @playlist.user = current_user
     if @playlist.save
-      @playlist = RSpotify::User.new(session[:spotify_user]).create_playlist!(@playlist.name)
+      spotify_playlist = RSpotify::User.new(session[:spotify_user]).create_playlist!(@playlist.name)
+      @playlist.update(spotify_id: spotify_playlist.id)
       flash[:notice] = 'Playlist created'
       redirect_to playlist_path(@playlist.id)
     else
